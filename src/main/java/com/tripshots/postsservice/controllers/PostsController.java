@@ -42,6 +42,11 @@ public class PostsController {
         return postsService.getPostsByPlaceId(placeId);
     }
 
+    @GetMapping(path = "/rating/{rating}")
+    public List<PostDTO> getPostsByRating(@PathVariable Float rating) throws PostNotFound {
+        return postsService.getPostsByRating(rating);
+    }
+
     @PostMapping(path = "", consumes = "application/json")
     public PostDTO createPost(@RequestBody PostDTO postDTO) throws PostAlreadyExists {
         return postsService.createPost(postDTO);

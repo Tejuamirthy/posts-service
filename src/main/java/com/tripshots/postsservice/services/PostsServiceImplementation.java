@@ -57,6 +57,21 @@ public class PostsServiceImplementation implements PostsService {
     }
 
     @Override
+    public List<PostDTO> getPostsByRating(Float rating) throws PostNotFound {
+        List<Post> posts = postsRepository.findPostsByRating(rating);
+        if(posts == null || posts.size() == 0) {
+            throw new PostNotFound("No posts found for given place");
+        }
+        List<PostDTO> postDTOs = new ArrayList<>();
+        for (Post post: posts) {
+            PostDTO postDTO = new PostDTO();
+            BeanUtils.copyProperties(post, postDTO);
+            postDTOs.add(postDTO);
+        }
+        return postDTOs;
+    }
+
+    @Override
     public PostDTO getPost(Long postId) throws PostNotFound {
         Optional<Post> post = postsRepository.findById(postId);
         if (post.isPresent()) {
