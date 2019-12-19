@@ -7,6 +7,6 @@ public interface ItineraryService {
 
     ItineraryDTO getItineraryById(String id) throws ItineraryNotFound;
     ItineraryDTO createItinerary(ItineraryDTO itineraryDTO);
-    ItineraryDTO deleteItinerary(ItineraryDTO itineraryDTO);
-    ItineraryDTO updateItinerary(ItineraryDTO itineraryDTO);
+    ItineraryDTO deleteItinerary(ItineraryDTO itineraryDTO) throws ItineraryNotFound;
+    ItineraryDTO updateItinerary(ItineraryDTO itineraryDTO) throws ItineraryNotFound;
 }

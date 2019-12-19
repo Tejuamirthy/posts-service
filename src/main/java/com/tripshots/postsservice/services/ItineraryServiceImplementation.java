@@ -31,16 +31,34 @@ public class ItineraryServiceImplementation implements ItineraryService {
 
     @Override
     public ItineraryDTO createItinerary(ItineraryDTO itineraryDTO) {
-        return null;
+        if(itineraryRepository.existsById(itineraryDTO.getId()))
+            return null;
+        Itinerary itinerary = new Itinerary();
+        BeanUtils.copyProperties(itineraryDTO, itinerary);
+        itineraryRepository.save(itinerary);
+        return itineraryDTO;
     }
 
     @Override
-    public ItineraryDTO deleteItinerary(ItineraryDTO itineraryDTO) {
-        return null;
+    public ItineraryDTO deleteItinerary(ItineraryDTO itineraryDTO) throws ItineraryNotFound {
+        itineraryNotFound(itineraryDTO.getId(),"Failed to delete");
+        itineraryRepository.deleteById(itineraryDTO.getId());
+        return itineraryDTO;
     }
 
     @Override
-    public ItineraryDTO updateItinerary(ItineraryDTO itineraryDTO) {
-        return null;
+    public ItineraryDTO updateItinerary(ItineraryDTO itineraryDTO)throws ItineraryNotFound {
+        itineraryNotFound(itineraryDTO.getId(),"Failed to update");
+        Itinerary itinerary = new Itinerary();
+        BeanUtils.copyProperties(itineraryDTO,itinerary);
+        itineraryRepository.save(itinerary);
+        return itineraryDTO;
     }
+
+    private void itineraryNotFound(String id, String message) throws ItineraryNotFound {
+        if(!itineraryRepository.existsById(id))
+            throw new ItineraryNotFound(message+": Itinerary not found");
+
+    }
+
 }
