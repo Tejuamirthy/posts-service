@@ -11,6 +11,8 @@ import java.util.List;
 public interface PostsService {
     List<PostDTO> getAllPosts(String Username) throws PostNotFound;
     List<PostDTO> getPostsByPlaceId(Long placeId) throws PostNotFound;
+    List<PostDTO> getPostsByRating(Float rating) throws PostNotFound;
+
 
     PostDTO getPost(Long postId) throws PostNotFound;
     PostDTO createPost(PostDTO postDTO) throws PostAlreadyExists;
