@@ -8,4 +8,5 @@ import java.util.List;
 public interface PostsRepository extends CrudRepository<Post, Long> {
     List<Post> findPostsByUsername(String username);
     List<Post> findPostsByPlaceId(Long placeId);
+    List<Post> findPostsByRating(Float rating);
 }

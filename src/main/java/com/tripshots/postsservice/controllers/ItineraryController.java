@@ -4,10 +4,7 @@ import com.tripshots.postsservice.exceptions.ItineraryNotFound;
 import com.tripshots.postsservice.model.ItineraryDTO;
 import com.tripshots.postsservice.services.ItineraryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/itinerary")
@@ -19,6 +16,21 @@ public class ItineraryController {
     @GetMapping(path = "/{id}")
     public ItineraryDTO getItinerary(@PathVariable String id) throws ItineraryNotFound {
         return itineraryService.getItineraryById(id);
+    }
+
+    @PostMapping(path = "/")
+    public ItineraryDTO createItinerary(@RequestBody ItineraryDTO itineraryDTO) {
+        return itineraryService.createItinerary(itineraryDTO);
+    }
+
+    @PutMapping(path = "/")
+    public ItineraryDTO updateItinerary(@RequestBody ItineraryDTO itineraryDTO) throws ItineraryNotFound {
+        return itineraryService.updateItinerary(itineraryDTO);
+    }
+
+    @DeleteMapping(path = "/")
+    public ItineraryDTO deleteItinerary(@RequestBody ItineraryDTO itineraryDTO) throws ItineraryNotFound {
+        return itineraryService.deleteItinerary(itineraryDTO);
     }
 
 }
