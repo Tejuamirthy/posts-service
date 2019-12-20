@@ -1,18 +1,12 @@
 package com.tripshots.postsservice.controllers;
 
-import com.tripshots.postsservice.exceptions.ItineraryNotFound;
 import com.tripshots.postsservice.exceptions.PostAlreadyExists;
 import com.tripshots.postsservice.exceptions.PostNotFound;
-import com.tripshots.postsservice.model.ItineraryDTO;
 import com.tripshots.postsservice.model.PostDTO;
-import com.tripshots.postsservice.model.UserDTO;
 import com.tripshots.postsservice.services.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
