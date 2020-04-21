@@ -52,6 +52,7 @@ public class ItineraryControllerTests {
         assertEquals(itineraryDTO, resItineraryDTO);
     }
 
+    @Test
     public void testUpdateItinerary() throws ItineraryNotFound{
         ItineraryDTO itineraryDTO = getNewItineraryDTO();
         List<ItineraryDayPlanDTO> list = new ArrayList<>();
@@ -63,6 +64,15 @@ public class ItineraryControllerTests {
         assertEquals(itineraryDTO, resItineraryDTO);
         assertEquals(1, itineraryDTO.getItineraryPlan().size());
     }
+
+    @Test
+    public void testDeleteItinerary() throws ItineraryNotFound {
+        ItineraryDTO itineraryDTO = getNewItineraryDTO();
+        when(itineraryService.deleteItinerary(itineraryDTO)).thenReturn(itineraryDTO);
+        ItineraryDTO resItineraryDTO = itineraryController.deleteItinerary(itineraryDTO);
+        assertEquals(itineraryDTO, resItineraryDTO);
+    }
+
 
     private ItineraryDTO getNewItineraryDTO() {
         ItineraryDTO itineraryDTO = new ItineraryDTO();
