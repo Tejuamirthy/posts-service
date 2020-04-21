@@ -39,6 +39,14 @@ public class ItineraryControllerTests {
         Assertions.assertEquals(itineraryDTO, resItineraryDTO);
     }
 
+    @Test
+    public void testCreateItinerary() {
+        ItineraryDTO itineraryDTO = getNewItineraryDTO();
+        Mockito.when(itineraryService.createItinerary(itineraryDTO)).thenReturn(itineraryDTO);
+        ItineraryDTO resItineraryDTO = itineraryController.createItinerary(itineraryDTO);
+        Assertions.assertEquals(itineraryDTO, resItineraryDTO);
+    }
+
     private ItineraryDTO getNewItineraryDTO() {
         ItineraryDTO itineraryDTO = new ItineraryDTO();
         itineraryDTO.setId("1");
