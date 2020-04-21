@@ -2,6 +2,7 @@ package com.tripshots.postsservice.controllers;
 
 import com.tripshots.postsservice.exceptions.ItineraryNotFound;
 import com.tripshots.postsservice.model.ItineraryDTO;
+import com.tripshots.postsservice.model.ItineraryDayPlanDTO;
 import com.tripshots.postsservice.services.ItineraryService;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,6 +50,18 @@ public class ItineraryControllerTests {
         when(itineraryService.createItinerary(itineraryDTO)).thenReturn(itineraryDTO);
         ItineraryDTO resItineraryDTO = itineraryController.createItinerary(itineraryDTO);
         assertEquals(itineraryDTO, resItineraryDTO);
+    }
+
+    public void testUpdateItinerary() throws ItineraryNotFound{
+        ItineraryDTO itineraryDTO = getNewItineraryDTO();
+        List<ItineraryDayPlanDTO> list = new ArrayList<>();
+        List<List<ItineraryDayPlanDTO>> resList = new ArrayList<>();
+        resList.add(list);
+        itineraryDTO.setItineraryPlan(resList);
+        when(itineraryService.updateItinerary(itineraryDTO)).thenReturn(itineraryDTO);
+        ItineraryDTO resItineraryDTO = itineraryController.updateItinerary(itineraryDTO);
+        assertEquals(itineraryDTO, resItineraryDTO);
+        assertEquals(1, itineraryDTO.getItineraryPlan().size());
     }
 
     private ItineraryDTO getNewItineraryDTO() {
