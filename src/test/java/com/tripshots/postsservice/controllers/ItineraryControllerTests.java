@@ -4,16 +4,17 @@ import com.tripshots.postsservice.exceptions.ItineraryNotFound;
 import com.tripshots.postsservice.model.ItineraryDTO;
 import com.tripshots.postsservice.services.ItineraryService;
 import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -34,17 +35,17 @@ public class ItineraryControllerTests {
     @Test
     public void testGetItinerary() throws ItineraryNotFound {
         ItineraryDTO itineraryDTO = getNewItineraryDTO();
-        Mockito.when(itineraryService.getItineraryById(itineraryDTO.getId())).thenReturn(itineraryDTO);
+        when(itineraryService.getItineraryById(itineraryDTO.getId())).thenReturn(itineraryDTO);
         ItineraryDTO resItineraryDTO = itineraryController.getItinerary(itineraryDTO.getId());
-        Assertions.assertEquals(itineraryDTO, resItineraryDTO);
+        assertEquals(itineraryDTO, resItineraryDTO);
     }
 
     @Test
     public void testCreateItinerary() {
         ItineraryDTO itineraryDTO = getNewItineraryDTO();
-        Mockito.when(itineraryService.createItinerary(itineraryDTO)).thenReturn(itineraryDTO);
+        when(itineraryService.createItinerary(itineraryDTO)).thenReturn(itineraryDTO);
         ItineraryDTO resItineraryDTO = itineraryController.createItinerary(itineraryDTO);
-        Assertions.assertEquals(itineraryDTO, resItineraryDTO);
+        assertEquals(itineraryDTO, resItineraryDTO);
     }
 
     private ItineraryDTO getNewItineraryDTO() {
