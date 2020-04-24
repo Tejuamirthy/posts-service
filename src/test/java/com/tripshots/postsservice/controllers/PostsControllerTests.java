@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -39,6 +42,17 @@ public class PostsControllerTests {
 
         PostDTO resDTO = postsController.getPost(postDTO.getId());
         assertEquals(postDTO, resDTO);
+    }
+
+    @Test
+    public void testGetPostsByUsername() throws PostNotFound {
+        String username = "TestUsername";
+        PostDTO postDTO = getPostDTO();
+        List<PostDTO> list = new ArrayList<>();
+        list.add(postDTO);
+        when(postsService.getAllPosts(username)).thenReturn(list);
+        List<PostDTO> resList = postsController.getAllPosts(username);
+        assertEquals(list, resList);
     }
 
     private PostDTO getPostDTO() {
